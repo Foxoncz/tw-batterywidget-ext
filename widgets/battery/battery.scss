@@ -1,0 +1,130 @@
+// variables
+$red-color: hsl(0, 75, 50);
+$orange-color: hsl(30, 75, 50);
+$yellow-color: hsl(60, 75, 50);
+$lime-color: hsl(90, 75, 50);
+$green-color: hsl(120, 75, 50);
+$darken: 40;
+$light-color: #BBB;
+$dark-color: #111;
+// mixins
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .battery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin battery-variant($background-color, $foreground-color) {
+  background-color: $background-color;
+  &:before {
+    background-color: $background-color;
+  }
+  &.battery-full .bar {
+    background-color: $green-color !important;
+    box-shadow: 0px 0px 15px 2px rgba($green-color, 0.6);
+  }
+  &.battery-error .bar {
+    background-color: $red-color !important;
+    box-shadow: 0px 0px 15px 2px rgba($red-color, 0.6);
+  }
+  
+  &.battery-charging .bar {
+    box-shadow: none;
+    animation: animate-charging 2s infinite;
+    @keyframes animate-charging {
+      0% {
+        background-color: $red-color;
+      }
+      25% {
+        background-color: $orange-color;
+      }
+      50% {
+        background-color: $yellow-color;
+      }
+      75% {
+        background-color: $lime-color;
+      }
+      100% {
+        background-color: $green-color;
+      }
+    }
+  }
+  .bar {
+    background-color: rgba($foreground-color, 0.2);
+    &.active {
+      background-color: $foreground-color;
+    }
+  }
+  .bar {
+    &.bar-red {
+      background-color: darken($red-color, $darken);
+      &.active {
+        background-color: $red-color;
+      }
+    }
+    &.bar-orange {
+      background-color: darken($orange-color, $darken);
+      &.active {
+        background-color: $orange-color;
+      }
+    }
+    &.bar-yellow {
+      background-color: darken($yellow-color, $darken);
+      &.active {
+        background-color: $yellow-color;
+      }
+    }
+    &.bar-lime {
+      background-color: darken($lime-color, $darken);
+      &.active {
+        background-color: $lime-color;
+      }
+    }
+    &.bar-green {
+      background-color: darken($green-color, $darken);
+      &.active {
+        background-color: $green-color;
+      }
+    }
+  }
+}
+
+// styles
+.battery-wrapper {
+  @include aspect-ratio(1, 2);
+  .battery {
+    @include battery-variant($dark-color, $light-color);
+    width: 80%;
+    height: 80%;
+    margin: 25% 10%;
+    border-radius: 5%;
+    &:before {
+      content: "";
+      position: absolute;
+      height: 10%;
+      width: 46%;
+      margin: -15% 0 0 27%;
+      border-radius: 20% 20% 0 0;
+    }
+    .bar {
+      margin: 15% auto;
+      width: 70%;
+      height: 11%;
+      border-radius: 5%;
+    }
+  }
+  .battery-variant-inverse {
+    @include battery-variant($light-color, $dark-color);
+  }
+}

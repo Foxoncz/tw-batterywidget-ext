@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <ExtensionPackages>
+        <ExtensionPackage dependsOn="" description="" minimumThingWorxVersion="7.2.1" name="BatteryWidget" packageVersion="1.0.0" vendor="Foxon.cz"> 
+        </ExtensionPackage>
+    </ExtensionPackages>
+    <Widgets>
+		<Widget name="battery">
+            <UIResources>
+                <FileResource description="" file="battery.ide.js" isDevelopment="true" isRuntime="false" type="JS"/>
+                <FileResource description="" file="battery.ide.css" isDevelopment="true" isRuntime="false" type="CSS"/>
+                <FileResource description="" file="battery.runtime.js" isDevelopment="false" isRuntime="true" type="JS"/>
+                <FileResource description="" file="battery.runtime.css" isDevelopment="false" isRuntime="true" type="CSS"/>
+            </UIResources>
+        </Widget>
+    </Widgets>
+</Entities>
